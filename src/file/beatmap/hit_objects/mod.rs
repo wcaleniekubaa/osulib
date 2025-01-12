@@ -99,8 +99,7 @@ impl FromStr for HitObject {
         let time = parts
             .next()
             .ok_or(Error::InvalidData("expected time while parsing hit object"))
-            .map(str::parse)
-            .map_err(Error::from)?
+            .map(str::parse)?
             .map(Duration::from_millis)?;
 
         let ty = parts
