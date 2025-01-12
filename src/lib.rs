@@ -1,14 +1,25 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+pub mod file;
+pub mod mode;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+mod iter;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+use std::{io, num};
+use thiserror::Error;
+
+#[derive(Debug, Error)]
+pub enum Error {
+    #[error("io error: {0}")]
+    Io(#[from] io::Error),
+
+    #[error("invalid input: {0}")]
+    InvalidInput(&'static str),
+
+    #[error("invalid data: {0}")]
+    InvalidData(&'static str),
+
+    #[error("failed to parse integer: {0}")]
+    ParseIntError(#[from] num::ParseIntError),
+
+    #[error("failed to parse float: {0}")]
+    ParseFloatError(#[from] num::ParseFloatError),
 }
