@@ -19,4 +19,4 @@ thiserror = "2.0.11"
 serde = ["dep:serde", "nalgebra-glm/serde-serialize", "bitflags/serde"]
 
 [dev-dependencies]
-toml = "0.8.19"
+toml = "0.8.20"
